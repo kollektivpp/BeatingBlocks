@@ -89,7 +89,6 @@ body {
         -webkit-transition: background-color $color-animation-duration, box-shadow $color-animation-duration, width 300ms, height 300ms;
     }
 
-
     &.red {
         background-color: $color-red;
         box-shadow: 0 0 20px 5px $color-red;

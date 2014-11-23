@@ -11,7 +11,8 @@ $(document).ready(function() {
 		up = $('.up .cubie'),
 		front = $('.front .cubie'),
 		right = $('.right .cubie'),
-		interval = null;
+		interval = null,
+		untilEnd = false;
 
 
 	cubies.each(function(index){
@@ -29,6 +30,7 @@ $(document).ready(function() {
 	}, 600);
 
 	function playHeartbeat() {
+		untilEnd = true;
 		left.addClass('beat');
 		back.addClass('beat');
 		down.addClass('beat');
@@ -46,12 +48,16 @@ $(document).ready(function() {
 		front.removeClass('beat');
 		right.removeClass('beat');
 		cubies.removeClass('beat');
+		untilEnd = false;
 	}
 
 
 	socket.emit( 'connectClient');
 
 	socket.on('heartbeat', function(pulse) {
+		if (!untilEnd) {
+			return;
+		}
 		playHeartbeat();
 		if (interval) {
 			clearInterval(interval);
