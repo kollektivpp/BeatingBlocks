@@ -31,7 +31,6 @@ $(document).ready(function() {
 	}, 600);
 
 	function playHeartbeat() {
-		untilEnd = true;
 		left.addClass('beat');
 		back.addClass('beat');
 		down.addClass('beat');
@@ -56,9 +55,10 @@ $(document).ready(function() {
 	socket.emit( 'connectClient');
 
 	socket.on('heartbeat', function(pulse) {
-		if (!untilEnd) {
+		if (untilEnd) {
 			return;
 		}
+		untilEnd = true;
 		playHeartbeat();
 		if (interval) {
 			clearInterval(interval);
