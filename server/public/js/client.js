@@ -10,7 +10,8 @@ $(document).ready(function() {
 		down = $('.down .cubie'),
 		up = $('.up .cubie'),
 		front = $('.front .cubie'),
-		right = $('.right .cubie');
+		right = $('.right .cubie'),
+		interval = null;
 
 
 	cubies.each(function(index){
@@ -27,11 +28,7 @@ $(document).ready(function() {
 		cubie.addClass(color);
 	}, 600);
 
-
-
-	socket.emit( 'connectClient');
-
-	socket.on('heartbeat', function(pulse) {
+	function playHeartbeat() {
 		left.addClass('beat');
 		back.addClass('beat');
 		down.addClass('beat');
@@ -39,17 +36,27 @@ $(document).ready(function() {
 		front.addClass('beat');
 		right.addClass('beat');
 		cubies.addClass('beat');
+		setTimeout(heartDown, 200);
+	}
+	function heartDown() {
+		left.removeClass('beat');
+		back.removeClass('beat');
+		down.removeClass('beat');
+		up.removeClass('beat');
+		front.removeClass('beat');
+		right.removeClass('beat');
+		cubies.removeClass('beat');
+	}
 
-		setTimeout(function() {
-			left.removeClass('beat');
-			back.removeClass('beat');
-			down.removeClass('beat');
-			up.removeClass('beat');
-			front.removeClass('beat');
-			right.removeClass('beat');
-			cubies.removeClass('beat');
 
-		}, 250);
+	socket.emit( 'connectClient');
+
+	socket.on('heartbeat', function(pulse) {
+		playHeartbeat();
+		if (interval) {
+			clearInterval(interval);
+		}
+		interval = setInterval(playHeartbeat, (60000 / pulse.data));
 	});
 
 	socket.on('deviceorientation', function(event) {
