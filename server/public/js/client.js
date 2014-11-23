@@ -3,7 +3,13 @@ $(document).ready(function() {
 		colors = ['red','pink','purple','deepPurple','indigo','blue','lightBlue','cyan','teal','green','lightGreen','lime','yellow','amber','orange','deepOrange','brown','grey','blueGrey'],
 		colorsLength = colors.length -1,
 		cubies = $('.cubie'),
-		cubiesLength = cubies.length - 1;
+		cubiesLength = cubies.length - 1,
+		left = $('.left .cubie'),
+		back = $('.back .cubie'),
+		down = $('.down .cubie'),
+		up = $('.up .cubie'),
+		front = $('.front .cubie'),
+		right = $('.right .cubie');
 
 
 	cubies.each(function(index){
@@ -25,7 +31,24 @@ $(document).ready(function() {
 	socket.emit( 'connectClient');
 
 	socket.on('heartbeat', function(pulse) {
-		console.log(pulse);
+		left.addClass('beat');
+		back.addClass('beat');
+		down.addClass('beat');
+		up.addClass('beat');
+		front.addClass('beat');
+		right.addClass('beat');
+		cubies.addClass('beat');
+
+		setTimeout(function() {
+			left.removeClass('beat');
+			back.removeClass('beat');
+			down.removeClass('beat');
+			up.removeClass('beat');
+			front.removeClass('beat');
+			right.removeClass('beat');
+			cubies.removeClass('beat');
+
+		}, 250);
 	});
 
 	socket.on('deviceorientation', function(event) {

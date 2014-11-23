@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	var socket = io(),
-		promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' }),
+	socket = io();
+	var 	promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' }),
 		deviceOrientation;
 
 	socket.emit( 'connectController' );

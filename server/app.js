@@ -31,6 +31,7 @@ app.get('/heartbeat', function(req, res) {
 	console.log("got it")
 		client.emit('heartbeat', {data: req.param('beat')});
 	});
+	res.send(200);
 });
 app.get('/gyro', function(req, res) {
 	renderClients.forEach(function(client) {
@@ -40,6 +41,7 @@ app.get('/gyro', function(req, res) {
 			z: req.param('z')
 		});
 	});
+	res.send(200);
 });
 
 
