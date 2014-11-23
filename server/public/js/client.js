@@ -2,6 +2,7 @@ $(document).ready(function() {
 	var socket = io(),
 		colors = ['red','pink','purple','deepPurple','indigo','blue','lightBlue','cyan','teal','green','lightGreen','lime','yellow','amber','orange','deepOrange','brown','grey','blueGrey'],
 		colorsLength = colors.length -1,
+		mainCube = $('#cube'),
 		cubies = $('.cubie'),
 		cubiesLength = cubies.length - 1,
 		left = $('.left .cubie'),
@@ -53,6 +54,6 @@ $(document).ready(function() {
 
 	socket.on('deviceorientation', function(event) {
 		// event.absolute | event.alpha | event.beta | event.gamma
-		console.log(event.beta);
+		mainCube.css('-webkit-transform:', 'rotateX(0deg) rotateY(130deg) rotateZ(60deg)');
 	});
 });
