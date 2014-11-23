@@ -26,6 +26,21 @@ app.get('/client', function(req, res) {
 	res.render('renderClient.html');
 });
 
+app.get('/heartbeat', function(req, res) {
+	renderClients.forEach(function(client) {
+		client.emit('heartbeat', {data: req.param('beat')});
+	});
+});
+app.get('/gyro', function(req, res) {
+	renderClients.forEach(function(client) {
+		client.emit('heartbeat', {
+			x: req.param('x'),
+			y: req.param('y'),
+			z: req.param('z')
+		});
+	});
+});
+
 
 // Socket Stuff
 io.on('connection', function(socket) {
@@ -36,7 +51,6 @@ io.on('connection', function(socket) {
 	});
 	socket.on('connectController', function() {
 		console.log('controller connected'.green);
-		renderClients.push(this);
 	});
 
 	socket.on('heartbeat', function(pulse) {
