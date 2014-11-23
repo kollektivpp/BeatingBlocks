@@ -3,6 +3,7 @@ $(document).ready(function() {
 		promise = new FULLTILT.getDeviceOrientation({ 'type': 'world' }),
 		deviceOrientation;
 
+	socket.emit( 'connectController' );
 	// socket.emit( 'heartbeat', 68 );
 
 
