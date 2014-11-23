@@ -29,7 +29,7 @@ app.get('/client', function(req, res) {
 app.get('/heartbeat', function(req, res) {
 	renderClients.forEach(function(client) {
 	console.log("got it")
-		client.emit('heartbeat', {data: req.param('beat')});
+		client.emit('heartbeat', req.param('beat'));
 	});
 	res.send(200);
 });

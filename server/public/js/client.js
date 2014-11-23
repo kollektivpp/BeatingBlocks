@@ -31,6 +31,7 @@ $(document).ready(function() {
 	}, 600);
 
 	function playHeartbeat() {
+		
 		left.addClass('beat');
 		back.addClass('beat');
 		down.addClass('beat');
@@ -49,21 +50,24 @@ $(document).ready(function() {
 		right.removeClass('beat');
 		cubies.removeClass('beat');
 		untilEnd = false;
+
 	}
 
 
 	socket.emit( 'connectClient');
 
 	socket.on('heartbeat', function(pulse) {
-		if (untilEnd) {
+		if (untilEnd || pulse <= 20) {
+			// cubies.addClass('grey');
 			return;
 		}
 		untilEnd = true;
 		playHeartbeat();
+		// cubies.addClass(colors[getRandomInt(0, colorsLength)]);
 		if (interval) {
 			clearInterval(interval);
 		}
-		interval = setInterval(playHeartbeat, (60000 / pulse.data));
+		interval = setInterval(playHeartbeat, (60000 / pulse));
 	});
 
 	socket.on('deviceorientation', function(event) {
