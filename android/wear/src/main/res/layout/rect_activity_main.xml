@@ -4,6 +4,19 @@
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".MainActivity" tools:deviceIds="wear_square">
 
-    <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="@string/hello_square" />
+    <TextView android:id="@+id/MainActivityHeartRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_activity_heart_rate" />
+
+    <TextView android:id="@+id/MainActivityAccuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_activity_accuracy" />
+
+    <TextView android:id="@+id/MainActivitySensorInformation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_activity_sensor_information" />
+
 </LinearLayout>

@@ -5,4 +5,8 @@
     <string name="hello_round">Hello Round World!</string>
     <string name="hello_square">Hello Square World!</string>
 
+    <string name="main_activity_heart_rate">Heart Rate</string>
+    <string name="main_activity_accuracy">Accuracy</string>
+    <string name="main_activity_sensor_information">Sensor Information</string>
+
 </resources>
