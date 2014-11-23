@@ -69,8 +69,8 @@ body {
 #cube .cubie{
     position:absolute;
     margin: 1px;
-    width:  $cube-size / 6;
-    height: $cube-size / 6;
+    width:  $cube-size / 8;
+    height: $cube-size / 8;
     z-index: -1;
     text-align: center;
     font-size:30px;
@@ -80,12 +80,13 @@ body {
     border-radius: 60%;
     backface-visibility: hidden;
 
-    -webkit-transition: width 300ms, height 300ms;
-    -webkit-transition: background-color $color-animation-duration, box-shadow $color-animation-duration;
+    
+    -webkit-transition: background-color $color-animation-duration, box-shadow $color-animation-duration, width 300ms, height 300ms;
 
     &.beat {
-        width:  $cube-size / 5;
-        height: $cube-size / 5;
+        width:  $cube-size / 6;
+        height: $cube-size / 6;
+        -webkit-transition: background-color $color-animation-duration, box-shadow $color-animation-duration, width 300ms, height 300ms;
     }
 
 
