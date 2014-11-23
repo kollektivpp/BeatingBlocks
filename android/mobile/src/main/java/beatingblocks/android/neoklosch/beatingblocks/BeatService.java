@@ -15,6 +15,8 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +37,8 @@ public class BeatService extends WearableListenerService {
     private static final String AXIS_Y_KEY = "axisy";
     private static final String AXIS_Z_KEY = "axisz";
 
+    HttpClient httpClient;
+
     private Socket mSocket;
 
     GoogleApiClient mGoogleApiClient;
@@ -47,6 +51,7 @@ public class BeatService extends WearableListenerService {
                 .build();
         mGoogleApiClient.connect();
         connectToServer();
+        httpClient = new DefaultHttpClient();
     }
 
     @Override
@@ -72,7 +77,7 @@ public class BeatService extends WearableListenerService {
                     String beat = dataMap.getString(BEAT_KEY);
                     Log.v(LOG_TAG, "beat: " + beat);
                     if (mSocket != null) {
-                        mSocket.emit("heartbeat", "hi");
+                        mSocket.emit("heartbeat", beat);
                     }
 
                 }
@@ -115,12 +120,9 @@ public class BeatService extends WearableListenerService {
     private void connectToServer() {
         try {
             Log.v(LOG_TAG, "trying to connect to nodejs server");
-            mSocket = IO.socket("http://192.168.43.57:8888/controller");
+            mSocket = IO.socket("http://192.168.43.57:8888");
         } catch(URISyntaxException urise) {
             Log.e(LOG_TAG, "wrong uri", urise);
-        }
-        if (mSocket == null) {
-            return;
         }
         mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
