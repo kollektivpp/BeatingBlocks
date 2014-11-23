@@ -6,10 +6,107 @@
     	<title>BeatingBlocks</title>
     	<link href="css/normalize.css" media="all" rel="stylesheet" type="text/css" />
     	<link href="css/main.css" media="all" rel="stylesheet" type="text/css" />
- 	</head>
+        <link href="css/rubix.css" media="all" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <section id="rubik">
+            <div id="cube-container">
+                <div id="cube-viewport">
+                    <div id="cube">
+                    <!-- UP FACE -->            
+                        <!-- LEFT COLUMN (L)  -->                
+                        <div class="utl cubie"></div> 
+                        <div class="ucl cubie"></div>
+                        <div class="ubl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->            
+                        <div class="utc cubie"></div>
+                        <div class="ucc cubie"></div>
+                        <div class="ubc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->
+                        <div class="utr cubie"></div>
+                        <div class="ucr cubie"></div>
+                        <div class="ubr cubie"></div>
+                    <!-- END UP FACE -->  
 
-	<body>
-        <h1>render client</h1>
+                    <!-- FRONT FACE -->
+                        <!-- LEFT COLUMN (L)  -->                
+                        <div class="ftl cubie"></div>
+                        <div class="fcl cubie"></div>
+                        <div class="fbl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->            
+                        <div class="ftc cubie"></div>
+                        <div class="fcc cubie"></div>
+                        <div class="fbc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->
+                        <div class="ftr cubie"></div>
+                        <div class="fcr cubie"></div>
+                        <div class="fbr cubie"></div>
+                    <!-- END FRONT FACE -->
+                    
+                    <!--DOWN FACE -->
+                        <!-- LEFT COLUMN (L)  -->                
+                        <div class="dtl cubie"></div>
+                        <div class="dcl cubie"></div>
+                        <div class="dbl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->                
+                        <div class="dtc cubie"></div>
+                        <div class="dcc cubie"></div>
+                        <div class="dbc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->        
+                        <div class="dtr cubie"></div>
+                        <div class="dcr cubie"></div>
+                        <div class="dbr cubie"></div>
+                    <!-- END DOWN FACE -->
+                    
+                    <!--BACK FACE -->    
+                        <!-- LEFT COLUMN (L)  -->           
+                        <div class="btl cubie"></div>
+                        <div class="bcl cubie"></div>
+                        <div class="bbl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->           
+                        <div class="btc cubie"></div>
+                        <div class="bcc cubie"></div>
+                        <div class="bbc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->    
+                        <div class="btr cubie"></div>
+                        <div class="bcr cubie"></div>
+                        <div class="bbr cubie"></div>
+                    <!--END BOTTOM FACE --> 
+                    
+                    <!--LEFT FACE -->
+                        <!-- LEFT COLUMN (L)  -->           
+                        <div class="ltl cubie"></div>
+                        <div class="lcl cubie"></div>
+                        <div class="lbl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->  
+                        <div class="ltc cubie"></div>
+                        <div class="lcc cubie"></div>
+                        <div class="lbc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->    
+                        <div class="ltr cubie"></div>
+                        <div class="lcr cubie"></div>
+                        <div class="lbr cubie"></div>
+                    <!--END LEFT FACE -->   
+                    
+                    <!--RIGHT FACE -->
+                        <!-- LEFT COLUMN (L)  -->           
+                        <div class="rtl cubie"></div>
+                        <div class="rcl cubie"></div>
+                        <div class="rbl cubie"></div>
+                        <!-- CENTER COLUMN (C)  -->  
+                        <div class="rtc cubie"></div>
+                        <div class="rcc cubie"></div>
+                        <div class="rbc cubie"></div>
+                        <!-- RIGHT COLUMN (R)  -->    
+                        <div class="rtr cubie"></div>
+                        <div class="rcr cubie"></div>
+                        <div class="rbr cubie"></div>
+                    <!--END LEFT FACE -->  
+                          
+                     </div>
+                </div>
+            </div>
+        </section>
 
     	<script src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.4/zepto.min.js"></script>
     	<script src="/socket.io/socket.io.js"></script>

@@ -31,6 +31,11 @@ app.get('/client', function(req, res) {
 io.on('connection', function(socket) {
 	
 	socket.on('connectClient', function() {
+		console.log('client connected'.green);
+		renderClients.push(this);
+	});
+	socket.on('connectController', function() {
+		console.log('controller connected'.green);
 		renderClients.push(this);
 	});
 
