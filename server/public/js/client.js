@@ -60,7 +60,10 @@ $(document).ready(function() {
 	});
 
 	socket.on('deviceorientation', function(event) {
-		// event.absolute | event.alpha | event.beta | event.gamma
-		mainCube.css('-webkit-transform', 'rotateX(0deg) rotateY(130deg) rotateZ(60deg)');
+		var obj = JSON.parse(event);
+		var x = obj.axisx,
+			y = obj.axisy,
+			z = obj.axisz;
+		mainCube.css('-webkit-transform', 'rotateX(' + x + 'deg) rotateY(' + y + 'deg) rotateZ(' + z + 'deg)');
 	});
 });
