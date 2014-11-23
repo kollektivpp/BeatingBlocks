@@ -92,9 +92,9 @@ public class BeatService extends WearableListenerService {
                     Log.v(LOG_TAG, "axisZ: " + toDegree(axisZ));
                     JSONObject coordinates = new JSONObject();
                     try {
-                        coordinates.put(AXIS_X_KEY, axisX);
-                        coordinates.put(AXIS_Y_KEY, axisY);
-                        coordinates.put(AXIS_Z_KEY, axisZ);
+                        coordinates.put(AXIS_X_KEY, toDegree(axisX));
+                        coordinates.put(AXIS_Y_KEY, toDegree(axisY));
+                        coordinates.put(AXIS_Z_KEY, toDegree(axisZ));
 
                     } catch (JSONException jsone) {
                         Log.e(LOG_TAG, jsone.getMessage(), jsone);
