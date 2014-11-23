@@ -12,7 +12,8 @@ $(document).ready(function() {
 		front = $('.front .cubie'),
 		right = $('.right .cubie'),
 		interval = null,
-		untilEnd = false;
+		untilEnd = false,
+		nextOrientationCall = false;
 
 
 	cubies.each(function(index){
@@ -66,10 +67,18 @@ $(document).ready(function() {
 	});
 
 	socket.on('deviceorientation', function(event) {
+		if (nextOrientationCall) {
+			return;
+		}
+		setInterval(function(){
+			nextOrientationCall = false;
+		}, 200);
+
 		var obj = JSON.parse(event);
 		var x = obj.axisx,
 			y = obj.axisy,
 			z = obj.axisz;
 		mainCube.css('-webkit-transform', 'rotateX(' + x + 'deg) rotateY(' + y + 'deg) rotateZ(' + z + 'deg)');
+		nextOrientationCall = true;
 	});
 });
