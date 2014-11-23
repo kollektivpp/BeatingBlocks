@@ -28,6 +28,7 @@ app.get('/client', function(req, res) {
 
 app.get('/heartbeat', function(req, res) {
 	renderClients.forEach(function(client) {
+	console.log("got it")
 		client.emit('heartbeat', {data: req.param('beat')});
 	});
 });
@@ -57,6 +58,7 @@ io.on('connection', function(socket) {
 		renderClients.forEach(function(client) {
 			client.emit('heartbeat', pulse);
 		});
+		// res.send(200);
 	});
 	socket.on('deviceorientation', function(event) {
 		// event.absolute | event.alpha | event.beta | event.gamma
