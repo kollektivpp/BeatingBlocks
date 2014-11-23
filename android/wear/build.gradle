@@ -12,10 +12,21 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    signingConfigs {
+        beatingblocks {
+            keyAlias 'BeatingBlocksKeystore'
+            keyPassword 'beatingblocks'
+            storeFile file('../BeatingBlocksKeystore.jks')
+            storePassword 'beatingblocks'
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.beatingblocks
         }
     }
 }
