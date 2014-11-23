@@ -1,0 +1,48 @@
+{
+  "name": "fulltilt",
+  "title": "Full Tilt",
+  "version": "0.5.1",
+  "description": "Standalone device orientation + device motion normalization and conversion library",
+  "homepage": "https://github.com/richtr/Full-Tilt",
+  "authors": [
+    "Rich Tibbett"
+  ],
+  "main": "dist/fulltilt.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "examples",
+    "test",
+    "*.md",
+    "Gruntfile.js",
+    "package.json",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "keywords": [
+    "full",
+    "tilt",
+    "fulltilt",
+    "deviceorientation",
+    "devicemotion",
+    "compass",
+    "quaternions",
+    "rotation",
+    "matrix",
+    "euler",
+    "tait",
+    "bryan",
+    "angles"
+  ],
+  "_release": "0.5.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.5.1",
+    "commit": "3905e70e3d6b3ed126d1e8d2b6ac05add7dfdb3a"
+  },
+  "_source": "git://github.com/richtr/Full-Tilt.git",
+  "_target": "~0.5.1",
+  "_originalSource": "fulltilt",
+  "_direct": true
+}

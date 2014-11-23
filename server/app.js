@@ -5,7 +5,9 @@ var path = require('path'),
 	colors = require('colors'),
 	port = process.env.PORT || 8888,
 	io = require('socket.io')(http),
-	fs = require('fs-extra');
+	bodyParser = require('body-parser'),
+	fs = require('fs-extra'),
+	renderClients = [];
 
 
 
@@ -16,23 +18,35 @@ app.use( bodyParser.urlencoded() );
 app.set('views', __dirname + '/public');
 app.engine('html', require('ejs').renderFile);
 
-app.get('/', function(req, res) {
-	
+
+app.get('/controller', function(req, res) {
+	res.render('controller.html');
+});
+app.get('/client', function(req, res) {
+	res.render('renderClient.html');
 });
 
 
 // Socket Stuff
 io.on('connection', function(socket) {
-	socket.on('???', function(user) {
+	
+	socket.on('connectClient', function() {
+		renderClients.push(this);
+	});
 
+	socket.on('heartbeat', function(pulse) {
+		renderClients.forEach(function(client) {
+			client.emit('heartbeat', pulse);
+		});
+	});
+	socket.on('deviceorientation', function(event) {
+		// event.absolute | event.alpha | event.beta | event.gamma
+		renderClients.forEach(function(client) {
+			client.emit('deviceorientation', event);
+		});
 	});
 });
 
-// function notifyConnectedClients(masterSocketID, filePath) {
-// 	connectedUser[masterSocketID].forEach(function(item) {
-// 		io.sockets.connected[item].emit('successfullyUploadedImage', filePath);
-// 	});
-// }
 
 
 // HTTP Server

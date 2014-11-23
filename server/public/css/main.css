@@ -35,4 +35,92 @@ input {
 select {
   cursor: pointer; }
 
+#qrcode {
+  margin: 100px; }
+
+#contentwrapper {
+  margin: 0;
+  min-width: 265px;
+  padding: 0;
+  text-align: center; }
+
+#dragdropfield {
+  display: box;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  display: box;
+  box-pack: center;
+  box-align: stretch;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-pack: center;
+  -moz-box-align: stretch;
+  display: -ms-flexbox;
+  -ms-flex-pack: center;
+  -ms-flex-align: stretch;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+  -webkit-align-items: flex-stretch;
+  display: flex;
+  justify-content: center;
+  align-items: flex-stretch;
+  border: 10px dashed #519548;
+  cursor: pointer;
+  min-height: 200px;
+  min-width: 160px;
+  max-height: 400px;
+  max-width: 320px; }
+  #dragdropfield.hover, #dragdropfield:hover {
+    border: 10px dashed #88c426; }
+
+#filefield {
+  display: none; }
+
+#hiddenIframe {
+  border: 0;
+  display: none;
+  height: 0;
+  width: 0; }
+
+#downloadwrapper {
+  top: 25%;
+  display: none;
+  height: 50%;
+  position: absolute;
+  vertical-align: middle;
+  width: 50%; }
+  #downloadwrapper.slave {
+    -webkit-transition: left 500ms ease-out;
+    -moz-transition: left 500ms ease-out;
+    -ms-transition: left 500ms ease-out;
+    -o-transition: left 500ms ease-out;
+    transition: left 500ms ease-out;
+    position: absolute;
+    right: -100%; }
+    #downloadwrapper.slave.show {
+      -webkit-transition: left 500ms ease-out;
+      -moz-transition: left 500ms ease-out;
+      -ms-transition: left 500ms ease-out;
+      -o-transition: left 500ms ease-out;
+      transition: left 500ms ease-out;
+      left: 10%; }
+
+#downloadwrapper img {
+  display: block;
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+  bottom: 0; }
+
 /*# sourceMappingURL=main.css.map */
