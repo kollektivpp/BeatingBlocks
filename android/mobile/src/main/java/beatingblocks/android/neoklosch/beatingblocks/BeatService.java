@@ -15,6 +15,9 @@ import com.google.android.gms.wearable.DataMapItem;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -43,6 +46,7 @@ public class BeatService extends WearableListenerService {
                 .addApi(Wearable.API)
                 .build();
         mGoogleApiClient.connect();
+        connectToServer();
     }
 
     @Override
@@ -67,6 +71,10 @@ public class BeatService extends WearableListenerService {
                     DataMap dataMap = DataMapItem.fromDataItem(event.getDataItem()).getDataMap();
                     String beat = dataMap.getString(BEAT_KEY);
                     Log.v(LOG_TAG, "beat: " + beat);
+                    if (mSocket != null) {
+                        mSocket.emit("heartbeat", "hi");
+                    }
+
                 }
             } else if (GYRO_PATH.equals(path)) {
                 if (event.getType() == DataEvent.TYPE_CHANGED) {
@@ -77,9 +85,27 @@ public class BeatService extends WearableListenerService {
                     Log.v(LOG_TAG, "axisX: " + toDegree(axisX));
                     Log.v(LOG_TAG, "axisY: " + toDegree(axisY));
                     Log.v(LOG_TAG, "axisZ: " + toDegree(axisZ));
+                    JSONObject coordinates = new JSONObject();
+                    try {
+                        coordinates.put(AXIS_X_KEY, axisX);
+                        coordinates.put(AXIS_Y_KEY, axisY);
+                        coordinates.put(AXIS_Z_KEY, axisZ);
+
+                    } catch (JSONException jsone) {
+                        Log.e(LOG_TAG, jsone.getMessage(), jsone);
+                    }
+                    if (mSocket != null) {
+                        mSocket.emit("deviceorientation", coordinates.toString());
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        mSocket.disconnect();
+        super.onDestroy();
     }
 
     private double toDegree(float value) {
@@ -88,7 +114,8 @@ public class BeatService extends WearableListenerService {
 
     private void connectToServer() {
         try {
-            mSocket = IO.socket("http://localhost");
+            Log.v(LOG_TAG, "trying to connect to nodejs server");
+            mSocket = IO.socket("http://192.168.43.57:8888/controller");
         } catch(URISyntaxException urise) {
             Log.e(LOG_TAG, "wrong uri", urise);
         }
@@ -99,19 +126,15 @@ public class BeatService extends WearableListenerService {
 
             @Override
             public void call(Object... args) {
-                mSocket.emit("foo", "hi");
-                mSocket.disconnect();
+                Log.v(LOG_TAG, "successfully connected to node js server");
             }
-
-        }).on("event", new Emitter.Listener() {
-
-            @Override
-            public void call(Object... args) {}
 
         }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
 
             @Override
-            public void call(Object... args) {}
+            public void call(Object... args) {
+                Log.v(LOG_TAG, "successfully disconnected from node js server");
+            }
 
         });
         mSocket.connect();
