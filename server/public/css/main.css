@@ -1,0 +1,38 @@
+/**
+* General mixins
+*
+* Version: 1.0.0
+*/
+/* Colors */
+/* Sizes */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  width: 100%; }
+
+body {
+  background-color: #ebebeb;
+  font-size: 16px;
+  margin: 0;
+  min-height: 380px;
+  min-width: 280px;
+  position: relative; }
+
+input, select {
+  background: #ffffff;
+  border: 1px solid #a4a4a4;
+  border-radius: 2px;
+  box-sizing: border-box;
+  height: 26px;
+  padding: 2px; }
+
+select:hover {
+  border-color: #7a7a7a; }
+
+input {
+  cursor: auto; }
+
+select {
+  cursor: pointer; }
+
+/*# sourceMappingURL=main.css.map */

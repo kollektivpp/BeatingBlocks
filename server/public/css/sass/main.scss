@@ -1,0 +1,104 @@
+@import "general-mixin";
+@import "variables";
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+}
+
+body {
+    background-color: $gray;
+    font-size: $fontSize;
+    margin: 0;
+    min-height: $windowHeight;
+    min-width: $windowWidth;
+    position: relative;
+}
+
+input, select {
+    background: $white;
+    border: $inputBorderSize solid $darkGray;
+    border-radius: 2px;
+    box-sizing: border-box;
+    height: $inputHeight;
+    padding: 2px;
+}
+
+select:hover {
+    border-color: $darkerGray;
+}
+
+input {
+    cursor: auto;
+}
+
+select {
+    cursor: pointer;
+}
+
+#qrcode {
+    margin: 100px;
+}
+
+#contentwrapper {
+    margin: 0;
+    min-width: 265px;
+    padding: 0;
+    text-align: center;
+}
+
+#dragdropfield {
+    @include flexbox-vertical;
+    @include flexbox-position(center, stretch);
+
+    border: $dragDropBorderSize dashed $green;
+    cursor: pointer;
+    min-height: 200px;
+    min-width: 160px;
+    max-height: 400px;
+    max-width: 320px;
+
+    &.hover, &:hover  {
+        border: $dragDropBorderSize dashed $lime;
+    }
+}
+
+#filefield {
+    display: none;
+}
+
+#hiddenIframe {
+    border: 0;
+    display: none;
+    height: 0;
+    width: 0;
+}
+
+#downloadwrapper {
+    top: 25%;
+    display: none;
+    height: 50%;
+    position: absolute;
+    vertical-align: middle;
+    width: 50%;
+
+    &.slave {
+        @include transition(left, 500ms, ease-out);
+        position: absolute;
+        right: -100%;
+
+        &.show {
+            @include transition(left, 500ms, ease-out);
+            left: 10%
+        }
+    }
+}
+
+#downloadwrapper img {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    bottom: 0;
+}

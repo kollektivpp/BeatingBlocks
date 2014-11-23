@@ -1,0 +1,231 @@
+/**
+* General mixins
+*
+* Version: 1.0.0
+*/
+@mixin appearance($style) {
+    appearance: $style;
+    -webkit-appearance: $style;
+    -moz-appearance: $style;
+    -ms-appearance: $style;
+}
+
+@mixin clearfix {
+    &:after {
+        content: ".";
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+}
+
+@mixin text-overflow {
+    // Requires inline-block or block for proper styling
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin placeholder($color) {
+    &:-moz-placeholder {
+        color: $color;
+    }
+    // Firefox 4-18
+    &::-moz-placeholder {
+        color: $color;
+    }
+    // Firefox 19+
+    &:-ms-input-placeholder {
+        color: $color;
+    }
+    // Internet Explorer 10+
+    &::-webkit-input-placeholder {
+        color: $color;
+    }
+    // Safari and Chrome
+}
+
+@mixin border-radius($value) {
+    border-top-left-radius: $value;
+    border-top-right-radius: $value;
+    border-bottom-left-radius: $value;
+    border-bottom-right-radius: $value;
+}
+
+@mixin border-box {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@mixin box-shadow($args) {
+    -webkit-box-shadow: $args;
+    -moz-box-shadow: $args;
+    box-shadow: $args;
+}
+
+@mixin gradient($args) {
+    $gradient: ();
+    $pos: nth($args, 1);
+    $fallback_color: nth(nth($args, 2), 1);
+    $pos_newsyntax: ();
+    // New Syntax
+    @if $pos == "top" {
+        $pos_newsyntax: "to bottom";
+    }
+    @else if $pos == "right" {
+        $pos_newsyntax: "to left";
+    }
+    @else if $pos == "bottom" {
+        $pos_newsyntax: "to top";
+    }
+    @else if $pos == "left" {
+        $pos_newsyntax: "to right";
+    }
+    @each $g in $args {
+        @if $g != "top" and $g != "right" and $g != "bottom" and $g != "left" and $g != "to top" and $g != "to right" and $g != "to bottom" and $g != "to left" {
+            $gradient: append($gradient, $g, comma);
+        }
+    }
+    background: $fallback_color;
+    background: -webkit-linear-gradient(unquote($pos), $gradient);
+    background: -moz-linear-gradient(unquote($pos), $gradient);
+    background: -ms-linear-gradient(unquote($pos), $gradient);
+    background: -o-linear-gradient(unquote($pos), $gradient);
+    background: unquote("linear-gradient(#{$pos_newsyntax}, #{$gradient})");
+}
+
+@mixin flexbox {
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flexbox-vertical {
+    @include flexbox;
+
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+@mixin flexbox-horizontal {
+    @include flexbox;
+
+    box-orient: horizontal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+@mixin flexbox-flex($ratio) {
+    display: block;
+    box-flex: $ratio;
+    -webkit-box-flex: $ratio;
+    -moz-box-flex: $ratio;
+    -ms-flex: $ratio;
+    -webkit-flex: $ratio;
+    flex: $ratio;
+    /* Hack for Windows Phone 8 */
+    p {
+        max-width: 100%;
+    }
+}
+
+@mixin flexbox-position($pack, $align) {
+    display: box;
+    box-pack: $pack;
+    box-align: $align;
+    display: -webkit-box;
+    -webkit-box-pack: $pack;
+    -webkit-box-align: $align;
+    display: -moz-box;
+    -moz-box-pack: $pack;
+    -moz-box-align: $align;
+    display: -ms-flexbox;
+    -ms-flex-pack: $pack;
+    -ms-flex-align: $align;
+    // New Syntax
+    @if $pack != "center" {
+        $pack: unquote("flex-#{$pack}");
+    }
+    @if $align != "center" {
+        $align: unquote("flex-#{$align}");
+    }
+    display: -webkit-flex;
+    -webkit-justify-content: $pack;
+    -webkit-align-items: $align;
+    display: flex;
+    justify-content: $pack;
+    align-items: $align;
+}
+
+@mixin transition($property, $duration, $timing) {
+    -webkit-transition: $property $duration $timing;
+    -moz-transition: $property $duration $timing;
+    -ms-transition: $property $duration $timing;
+    -o-transition: $property $duration $timing;
+    transition: $property $duration $timing;
+}
+
+@mixin transition-prefixed($property, $duration, $timing) {
+    transition: #{$property} $duration $timing;
+    -webkit-transition: -webkit-#{$property} $duration $timing;
+    -moz-transition: -moz-#{$property} $duration $timing;
+    -o-transition: -o-#{$property} $duration $timing;
+    -ms-transition: -ms-#{$property} $duration $timing;
+}
+
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
+@mixin rotateY($degrees) {
+    -webkit-transform: rotateY($degrees);
+    -moz-transform: rotateY($degrees);
+    -ms-transform: rotateY($degrees);
+    transform: rotateY($degrees);
+}
+
+@mixin rotateZ($degrees) {
+    -webkit-transform: rotateZ($degrees);
+    -moz-transform: rotateZ($degrees);
+    -ms-transform: rotateZ($degrees);
+    transform: rotateZ($degrees);
+}
+
+@mixin perspective($distance) {
+    -webkit-perspective: $distance;
+    -moz-perspective: $distance;
+    -ms-perspective: $distance;
+    perspective: $distance;
+}
+
+@mixin backface-visibility-hidden {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+@mixin preserve-3d {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
